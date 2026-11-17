@@ -16,7 +16,7 @@ const User = sequelize.define('User', {
         unique: true,                           // 같은 이메일 중복 불가
     },
     role: {
-        type: DataTypes.STRING(20),             // 'USER' 또는 'ADMIN"
+        type: DataTypes.STRING(20),             // 'ADMIN' = 관리자 인지 아닌지로 관리 관리자가 아니라면 일반 회원
     },
     nickname: {
         type: DataTypes.STRING(30),
