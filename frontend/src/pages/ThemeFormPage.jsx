@@ -24,6 +24,10 @@ const THEME_GENRES = [
   "타임어택",
   "범죄",
   "야외",
+  "로맨스",
+  "역사",
+  "문제방",
+  "기타",
 ];
 
 export default function ThemeFormPage() {
