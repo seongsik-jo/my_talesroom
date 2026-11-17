@@ -61,7 +61,7 @@ const deleteComment = async (commentId, loginUser) => {
 
     // 권한 검사 (작성자 본인 또는 관리자)
     const isOwner = comment.userId === loginUser.id;
-    const isAdmin = loginUser.role === 'admin';
+    const isAdmin = loginUser.role?.toUpperCase() === 'ADMIN';
 
     if (!isOwner && !isAdmin) {
         const error = new Error('작성자 또는 관리자만 삭제할 수 있습니다.');

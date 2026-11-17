@@ -24,6 +24,10 @@ const THEME_GENRES = [
   "타임어택",
   "범죄",
   "야외",
+  "로맨스",
+  "역사",
+  "문제방",
+  "기타",
 ];
 
 export default function ThemeFormPage() {
@@ -38,7 +42,7 @@ export default function ThemeFormPage() {
   const [pending, setPending] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [retry, setRetry] = useState(0);
-  const isAdmin = user?.role === "ADMIN";
+  const isAdmin = user?.role?.toUpperCase() === "ADMIN";
   useEffect(() => {
     if (!id || !isAdmin) return;
     const controller = new AbortController();

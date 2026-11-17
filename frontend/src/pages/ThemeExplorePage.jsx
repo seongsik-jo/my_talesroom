@@ -23,7 +23,10 @@ const genres = [
   "타임어택",
   "범죄",
   "야외",
-  "?",
+  "로맨스",
+  "역사",
+  "문제방",
+  "기타",
 ];
 const size = 6;
 
@@ -107,7 +110,7 @@ export default function ThemeExplorePage() {
           </p>
         </div>
         <div className="theme-heading-actions">
-          {user?.role === "ADMIN" && (
+          {user?.role?.toUpperCase() === "ADMIN" && (
             <Link className="theme-admin-button" to="/themes/new">
               ＋ 테마 등록
             </Link>

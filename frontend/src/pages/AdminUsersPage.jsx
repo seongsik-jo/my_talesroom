@@ -13,7 +13,7 @@ const PAGE_SIZE = 10; // 한 페이지 10명
 
 function AdminUsersPage() {
   const { user, isLoggedIn } = useAuth(); // 로그인 여부와 내 정보 { id, nickname, role }
-  const isAdmin = user?.role === "ADMIN"; // 관리자인지
+  const isAdmin = user?.role?.toUpperCase() === "ADMIN"; // 관리자인지
   const [searchParams, setSearchParams] = useSearchParams(); // 주소창 ?page= 읽기/쓰기
   const page = Number(searchParams.get("page")) || 1; // 없으면 1페이지
 
@@ -106,8 +106,8 @@ function AdminUsersPage() {
                         <td className="admin-users__muted">{u.email}</td>
                         {/* 권한 배지: ADMIN은 진한 색, USER는 연한 색 */}
                         <td>
-                          <span className={`admin-users__role ${u.role === "ADMIN" ? "is-admin" : ""}`}>
-                            {u.role === "ADMIN" ? "관리자" : "회원"}
+                          <span className={`admin-users__role ${u.role?.toUpperCase() === "ADMIN" ? "is-admin" : ""}`}>
+                            {u.role?.toUpperCase() === "ADMIN" ? "관리자" : "회원"}
                           </span>
                         </td>
                         <td className="admin-users__muted">{formatDate(u.createdAt)}</td>

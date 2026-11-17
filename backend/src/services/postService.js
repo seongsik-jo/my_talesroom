@@ -116,7 +116,7 @@ function validatePostBody(user, body) {
     if (!category || !title || !content) throw httpError(400, '필수 값이 누락되었습니다.');
     if (!CATEGORIES.includes(category)) throw httpError(400, '잘못된 카테고리 값입니다.');
     if (title.length > 200) throw httpError(400, '제목은 200자 이하로 입력해주세요.');
-    if (isNotice && user.role !== 'ADMIN') throw httpError(403, '공지 설정은 관리자만 가능합니다.');
+    if (isNotice && user.role?.toUpperCase() !== 'ADMIN') throw httpError(403, '공지 설정은 관리자만 가능합니다.');
 }
 
 // 게시글 작성 (작성 시 점수 +10점 부여 및 등급 자동 갱신)
@@ -150,7 +150,7 @@ async function deletePost(user, id) {
     const post = await postRepository.findById(id);     
     if (!post) throw httpError(404, '게시글을 찾을 수 없습니다.');
     const isOwner = post.userId === user.id;        
-    const isAdmin = user.role === 'ADMIN';
+    const isAdmin = user.role?.toUpperCase() === 'ADMIN';
     if (!isOwner && !isAdmin) throw httpError(403, '작성자 또는 관리자만 삭제할 수 있습니다.');
 
     // 1. 게시글 삭제 실행
@@ -172,7 +172,7 @@ async function updatePost(user, id, body) {
     const post = await postRepository.findById(id);             // 1. 글이 있는지?
     if (!post) throw httpError(404, '게시글을 찾을 수 없습니다.');
     const isOwner = post.userId === user.id;                // 2. 권한: 작성자 본인인지?
-    const isAdminOnNotice = post.isNotice === 1 && user.role === 'ADMIN';
+    const isAdminOnNotice = post.isNotice === 1 && user.role?.toUpperCase() === 'ADMIN';
     if (!isOwner && !isAdminOnNotice) throw httpError(403, '작성자만 수정할 수 있습니다.');
 
     validatePostBody(user, body);                               // 3. 입력 검사
