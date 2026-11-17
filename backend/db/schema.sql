@@ -188,7 +188,7 @@ ALTER TABLE `theme_reviews` ADD CONSTRAINT `fk_theme_reviews_theme_id` FOREIGN K
 ALTER TABLE `theme_reviews` ADD CONSTRAINT `fk_theme_reviews_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `recruitments` ADD CONSTRAINT `fk_recruitments_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-ALTER TABLE `recruitments` ADD CONSTRAINT `fk_recruitments_theme_id` FOREIGN KEY (`theme_id`) REFERENCES `themes` (`id`);
+ALTER TABLE `recruitments` ADD CONSTRAINT `fk_recruitments_theme_id` FOREIGN KEY (`theme_id`) REFERENCES `themes` (`id`) ON DELETE SET NULL;
 
 ALTER TABLE `recruitment_applications` ADD CONSTRAINT `fk_recruitment_applications_recruitment_id` FOREIGN KEY (`recruitment_id`) REFERENCES `recruitments` (`id`) ON DELETE CASCADE;
 ALTER TABLE `recruitment_applications` ADD CONSTRAINT `fk_recruitment_applications_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
