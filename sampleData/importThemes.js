@@ -11,6 +11,15 @@ dotenv.config({
 // 기존 Sequelize 모델 재사용
 const { sequelize, Theme } = require('../backend/src/models');
 
+// 장르 정리: 원본 사이트의 미분류 값 "?"와 장르 없음(null, 빈 문자열)을 모두 '기타'로 통일
+// (이전에는 null을 '?'로 저장해서 원본의 "?" 35개 + null 8개 = 43개가 '?' 장르로 들어갔음)
+const UNKNOWN_GENRE = '기타';
+function normalizeGenre(genre) {
+  const value = typeof genre === 'string' ? genre.trim() : '';
+  if (!value || value === '?') return UNKNOWN_GENRE;
+  return value;
+}
+
 async function importThemes() {
   try {
     // 1. JSON 파일 읽기
@@ -64,7 +73,7 @@ async function importThemes() {
           playTime: theme.playTime ?? 0,
           difficulty: theme.difficulty ?? 0,
           price: theme.price ?? 0,
-          genre: theme.genre ?? '?',
+          genre: normalizeGenre(theme.genre), // "?"·null·빈 값 → '기타'
           thumbnailUrl: theme.thumbnailUrl ?? null,
           latitude: theme.latitude ?? null,
           longitude: theme.longitude ?? null
