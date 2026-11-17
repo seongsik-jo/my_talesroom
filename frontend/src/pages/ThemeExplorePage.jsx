@@ -107,7 +107,7 @@ export default function ThemeExplorePage() {
           </p>
         </div>
         <div className="theme-heading-actions">
-          {user?.role === "ADMIN" && (
+          {user?.role?.toUpperCase() === "ADMIN" && (
             <Link className="theme-admin-button" to="/themes/new">
               ＋ 테마 등록
             </Link>

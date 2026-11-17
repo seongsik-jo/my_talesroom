@@ -177,7 +177,7 @@ function MyPagePage() {
               </span>
               <span aria-hidden="true">›</span>
             </Link>
-            {user?.role === "ADMIN" && (
+            {user?.role?.toUpperCase() === "ADMIN" && (
               <Link to="/admin/users" className="mypage-activity-link">
                 <span className="mypage-activity-icon" aria-hidden="true">
                   <svg

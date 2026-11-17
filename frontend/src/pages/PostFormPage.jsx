@@ -19,7 +19,7 @@ function PostFormPage() {
   const isEdit = Boolean(id); // id가 있으면 수정 모드
   const navigate = useNavigate();
   const { showAlert } = useDialog();
-  const isAdmin = getStoredUser()?.role === "ADMIN"; // 관리자만 "공지 등록" 체크박스 보이기
+  const isAdmin = getStoredUser()?.role?.toUpperCase() === "ADMIN"; // 관리자만 "공지 등록" 체크박스 보이기
 
   const [form, setForm] = useState(EMPTY_FORM); // 입력값 전체를 객체 하나로 관리
   const [errors, setErrors] = useState({}); // 칸별 에러 { title: "제목을 입력해 주세요." }

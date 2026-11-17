@@ -126,7 +126,7 @@ function normalizeOptionalString(value, statusCode, errorMessage) {
 function validateAdmin(authUser) {
     if (!authUser) { throw createHttpError(401, '로그인이 필요합니다.'); }
 
-    if (authUser.role !== 'ADMIN') { throw createHttpError(403, '관리자만 접근할 수 있습니다.'); }
+    if (authUser.role?.toUpperCase() !== 'ADMIN') { throw createHttpError(403, '관리자만 접근할 수 있습니다.'); }
 }
 
 function optionalCoordinate(value, min, max) {

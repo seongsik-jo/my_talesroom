@@ -38,7 +38,7 @@ export default function ThemeFormPage() {
   const [pending, setPending] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [retry, setRetry] = useState(0);
-  const isAdmin = user?.role === "ADMIN";
+  const isAdmin = user?.role?.toUpperCase() === "ADMIN";
   useEffect(() => {
     if (!id || !isAdmin) return;
     const controller = new AbortController();

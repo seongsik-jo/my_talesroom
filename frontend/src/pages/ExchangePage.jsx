@@ -18,7 +18,7 @@ async function fetchExchangeData() {
   if (!isLoggedIn()) return { items, user: null, history: [], allHistory: [] };
 
   const user = await fetchMyInfo();
-  const isAdmin = user?.role?.toLowerCase() === "admin";
+  const isAdmin = user?.role?.toUpperCase() === "ADMIN";
   const history = isAdmin ? [] : await fetchMyExchanges();
   const allHistory = isAdmin ? await fetchAllExchanges() : [];
 
@@ -55,7 +55,7 @@ function ExchangePage() {
 
   const CONVERSION_RATE = 10;
   const availablePoints = user.score * CONVERSION_RATE;
-  const isAdmin = user.role && user.role.toLowerCase() === "admin";
+  const isAdmin = user.role?.toUpperCase() === "ADMIN";
 
   const applyData = useCallback(({ items, user, history, allHistory }) => {
     setItems(items);

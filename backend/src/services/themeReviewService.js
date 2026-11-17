@@ -112,7 +112,7 @@ const deleteThemeReview = async (themeId, loginUserId, role, targetUserId) => {
     throw error;
   }
 
-  if (targetUserId && targetUserId !== loginUserId && role !== 'ADMIN') {
+  if (targetUserId && targetUserId !== loginUserId && role?.toUpperCase() !== 'ADMIN') {
     const error = new Error('관리자만 다른 회원의 후기를 삭제할 수 있습니다.');
     error.status = 403;
     throw error;

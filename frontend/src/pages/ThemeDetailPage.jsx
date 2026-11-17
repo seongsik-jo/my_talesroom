@@ -222,7 +222,7 @@ function Reviews({ id, user, summary, onSummary }) {
                   </time>
                 </div>
                 <p>{review.content}</p>
-                {(isMine(review) || user?.role === "ADMIN") && (
+                {(isMine(review) || user?.role?.toUpperCase() === "ADMIN") && (
                   <button
                     className="theme-text-button"
                     disabled={pending}
@@ -400,7 +400,7 @@ function ThemeDetail({ id }) {
                     longitude={theme.longitude}
                   />
                 </div>
-                {user?.role === "ADMIN" && (
+                {user?.role?.toUpperCase() === "ADMIN" && (
                   <details className="theme-more">
                     <summary aria-label="테마 관리 메뉴">⋮</summary>
                     <div>

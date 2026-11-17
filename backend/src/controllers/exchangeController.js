@@ -68,7 +68,9 @@ const deleteItem = async (req, res, next) => {
 // [관리자] 전체 교환 내역 조회 컨트롤러
 async function getAllExchanges(req, res, next) {
     try {
-        if (!req.user || (req.user.role !== 'ADMIN' && req.user.role !== 'admin')) {
+        // if (!req.user || (req.user.role !== 'ADMIN' && req.user.role !== 'admin')) {
+        // role을 대문자로 바꿔서 'ADMIN'과 비교 (admin, Admin도 관리자로 인정, role이 없으면 undefined → 관리자 아님)
+        if (!req.user || req.user.role?.toUpperCase() !== 'ADMIN') {
             return res.status(403).json({ success: false, message: '접근 권한이 없습니다.' });
         }
         
